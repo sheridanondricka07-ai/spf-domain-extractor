@@ -81,16 +81,23 @@ processBtn.addEventListener('click', async () => {
 
             processedBytes += value.length;
             const progress = (processedBytes / masterFile.size) * 100;
+            
+            // Force UI update
             progressBar.style.width = `${progress}%`;
             percentText.textContent = `${Math.round(progress)}%`;
 
+            // Yield control every few chunks to allow the browser to repaint
+            // This prevents the "0% to 100% jump"
+            if (processedBytes % (1024 * 1024) < value.length) { 
+                await new Promise(resolve => setTimeout(resolve, 0));
+            }
+
             const chunkText = decoder.decode(value, { stream: true });
             const lines = (leftover + chunkText).split(/\r?\n/);
-            leftover = lines.pop(); // keep incomplete line for next chunk
+            leftover = lines.pop();
 
             for (const line of lines) {
                 const lower = line.toLowerCase();
-                // Split by whitespace, colon, and equals sign as per user's Python logic
                 const tokens = lower.replace(":", " ").replace("=", " ").split(/\s+/);
                 for (const token of tokens) {
                     if (token.includes('.')) {
@@ -102,6 +109,7 @@ processBtn.addEventListener('click', async () => {
                 }
             }
         }
+
 
         // Process leftover line
         if (leftover) {
