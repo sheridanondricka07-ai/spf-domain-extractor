@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPFâ€‘Domain Extractor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="card">
+    <h1>SPFâ€‘Domain Extractor</h1>
+    <div class="file-inputs">
+      <label>
+        <span>Domains file (domains.txt)</span>
+        <input type="file" id="domainsFile" accept=".txt" />
+      </label>
+      <label>
+        <span>SPF records file (Master_with_includes.txt)</span>
+        <input type="file" id="masterFile" accept=".txt" />
+      </label>
+    </div>
+    <button id="processBtn" disabled>Process</button>
+    <progress id="progressBar" value="0" max="100" hidden></progress>
+    <textarea id="resultBox" readonly placeholder="Matches will appear hereâ€¦"></textarea>
+    <div class="actions">
+      <button id="copyBtn" disabled>Copy to Clipboard</button>
+      <a id="downloadLink" href="#" download="matches.txt" hidden>Download Results</a>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
