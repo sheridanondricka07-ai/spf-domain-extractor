@@ -1,32 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SPFâ€‘Domain Extractor</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPF Domain Extractor Pro</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="card">
-    <h1>SPFâ€‘Domain Extractor</h1>
-    <div class="file-inputs">
-      <label>
-        <span>Domains file (domains.txt)</span>
-        <input type="file" id="domainsFile" accept=".txt" />
-      </label>
-      <label>
-        <span>SPF records file (Master_with_includes.txt)</span>
-        <input type="file" id="masterFile" accept=".txt" />
-      </label>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
     </div>
-    <button id="processBtn" disabled>Process</button>
-    <progress id="progressBar" value="0" max="100" hidden></progress>
-    <textarea id="resultBox" readonly placeholder="Matches will appear hereâ€¦"></textarea>
-    <div class="actions">
-      <button id="copyBtn" disabled>Copy to Clipboard</button>
-      <a id="downloadLink" href="#" download="matches.txt" hidden>Download Results</a>
-    </div>
-  </div>
-  <script src="script.js"></script>
+    
+    <main class="container">
+        <header>
+            <div class="logo">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h1>SPF Extractor <span>Pro</span></h1>
+            <p>Fast, client-side domain extraction for large SPF records.</p>
+        </header>
+
+        <section class="glass-card">
+            <div class="upload-grid">
+                <div class="upload-box" id="drop-zone-1">
+                    <label for="domainsFile">
+                        <div class="icon">ðŸ“</div>
+                        <span class="label-text">Domains Available</span>
+                        <span class="file-name" id="name-1">No file chosen</span>
+                    </label>
+                    <input type="file" id="domainsFile" accept=".txt" hidden>
+                </div>
+
+                <div class="upload-box" id="drop-zone-2">
+                    <label for="masterFile">
+                        <div class="icon">ðŸ“„</div>
+                        <span class="label-text">Master with include</span>
+                        <span class="file-name" id="name-2">No file chosen</span>
+                    </label>
+                    <input type="file" id="masterFile" accept=".txt" hidden>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="processBtn" class="btn-primary" disabled>
+                    <span class="btn-text">Extract Matches</span>
+                    <div class="btn-loader" hidden></div>
+                </button>
+            </div>
+
+            <div class="progress-container" id="progressSection" hidden>
+                <div class="progress-info">
+                    <span id="statusText">Processing...</span>
+                    <span id="percentText">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progressBar"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="results-container" id="resultSection" hidden>
+            <div class="results-header">
+                <h2>Extracted Results</h2>
+                <div class="results-actions">
+                    <button id="copyBtn" class="btn-secondary">
+                        <i>ðŸ“‹</i> Copy
+                    </button>
+                    <a id="downloadBtn" href="#" download="extracted_results.txt" class="btn-download">
+                        <i>ðŸ“¥</i> Download TXT
+                    </a>
+                </div>
+            </div>
+            <textarea id="resultBox" readonly spellcheck="false"></textarea>
+            <div class="stats">
+                <span id="matchCount">0 matches found</span>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
