@@ -141,12 +141,13 @@ processBtn.addEventListener('click', async () => {
 copyBtn.addEventListener('click', async () => {
     try {
         await navigator.clipboard.writeText(resultBox.value);
-        const originalText = copyBtn.innerHTML;
-        copyBtn.innerHTML = '<i>âœ…</i> Copied!';
+        const originalHTML = copyBtn.innerHTML;
+        copyBtn.textContent = 'Copied!';
         setTimeout(() => {
-            copyBtn.innerHTML = originalText;
+            copyBtn.innerHTML = originalHTML;
         }, 2000);
     } catch (err) {
         alert('Failed to copy!');
     }
 });
+
